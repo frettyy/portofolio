@@ -85,11 +85,14 @@ body {
     align-items: flex-start;
     flex-wrap: nowrap;
     gap: 40px;
-    margin: 7vh 0;
+    margin: 7vh auto;
+    max-width: 1200px; /* Batas lebar agar lebih seimbang */
+    padding: 0 50px;   /* Tambahkan padding samping */
     opacity: 0;
     transform: translateY(30px);
     transition: all 0.6s ease-in-out;
 }
+
 
 .project-wrapper.show {
     opacity: 1;
@@ -103,7 +106,7 @@ body {
 }
 
 .project-image img {
-    max-width: 60%;
+    max-width: 80%;
     height: auto;
 }
 
