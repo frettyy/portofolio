@@ -1,0 +1,189 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #4fc3f7 0%, #1976d2 100%);
+    font-family: "Arial", sans-serif;
+    overflow-x: hidden;
+}
+
+.hero-wrapper {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.curve-text-svg {
+    position: absolute;
+    top: 20vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 24vh;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.nav-menu li a.active {
+    /* Gaya untuk item aktif */
+    color: #ffff;
+    font-weight: 700;
+}
+
+.circle-bg {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 30vw;
+    background: #fec939;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    z-index: 1;
+    /* min-width: 20px;
+    min-height: 120px; */
+    transition: all 0.3s ease;
+}
+
+.desc {
+    position: absolute;
+    left: 50%;
+    top: 60vh;
+    transform: translateX(-50%);
+    color: #fff;
+    width: 50vw;
+    text-align: center;
+    font-size: 25px;
+    z-index: 3;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.latest-project-section {
+    padding: 60px 0;
+    background-color: #f8fcff;
+    width: 100%;
+}
+
+
+.section-title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+.project-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    gap: 40px;
+    margin: 7vh 0;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-in-out;
+}
+
+.project-wrapper.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+.project-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.project-image img {
+    max-width: 60%;
+    height: auto;
+}
+
+.project-text {
+    max-width: 500px;
+    padding: 15px;
+}
+
+.project-title {
+    font-size: 20px;
+    margin-bottom: 16px;
+    text-align: justify;
+}
+
+.project-description {
+    text-align: justify;
+    hyphens: auto;
+    word-spacing: -0.2px;
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 24px;
+}
+.wavy-underline-projek1 {
+    text-decoration: underline wavy #d64550;
+}
+.wavy-underline-projek2 {
+    text-decoration: underline wavy #5da23b;
+}
+.wavy-underline-projek3 {
+    text-decoration: underline wavy #ff8da1;
+}
+.wavy-underline-projek4 {
+    text-decoration: underline wavy #b97327;
+}
+
+.github-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #24292e; /* Warna khas GitHub */
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.github-button:hover {
+    background-color: #444c56;
+}
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    color: #000;
+    font-size: 14px;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+    margin-top: auto;
+    background: linear-gradient(to right, #fffde7, #e3f2fd);
+}
+
+@media (max-width: 900px) {
+    .project-description {
+        line-height: 1.7; /* Sedikit lebih ketat di mobile */
+        font-size: 15px;
+    }
+    .project-text {
+        padding: 0 10px;
+        max-width: 90%; /* Lebih lebar di mobile */
+    }
+    .desc {
+        font-size: 1rem;
+        width: 90vw;
+        top: 55vh;
+    }
+    .curve-text-svg {
+        font-size: 26px;
+        height: 16vh;
+    }
+    .circle-bg {
+        width: 180vw;
+        bottom: -30vw;
+    }
+}
