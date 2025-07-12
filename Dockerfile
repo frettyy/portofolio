@@ -15,7 +15,7 @@ RUN a2enmod rewrite
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copy project files
+# Copy project files to Apache root
 COPY . /var/www/html
 
 # Set working directory
@@ -24,30 +24,32 @@ WORKDIR /var/www/html
 # Install Laravel dependencies
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
-# Set permissions
+# Set file permissions (important!)
 RUN chown -R www-data:www-data storage bootstrap/cache
 
-# Set DocumentRoot to Laravel's public folder
+# Laravel Artisan cache clear & optimize
+RUN php artisan config:clear \
+    && php artisan route:clear \
+    && php artisan view:clear \
+    && php artisan config:cache
+
+# Set Apache DocumentRoot ke folder public/
 RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
 
-# Tambahkan ServerName untuk hilangkan warning
+# Tambah ServerName biar tidak warning
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
-# Laravel config cache
-RUN php artisan config:clear && php artisan config:cache
+# Debug listing (opsional, boleh hapus di production)
+RUN echo "== FILES IN /var/www/html ==" && ls -la /var/www/html
+RUN echo "== FILES IN /var/www/html/public ==" && ls -la /var/www/html/public
 
 # Salin entrypoint.sh ke container
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-
-RUN echo "== FILES IN /var/www/html ==" && ls -la /var/www/html
-RUN echo "== FILES IN /var/www/html/public ==" && ls -la /var/www/html/public
-
-
-# Railway akan set PORT lewat env var, default expose 80
+# Railway expose port via ENV
 EXPOSE 8080
 
-# Gunakan entrypoint dan jalankan apache
+# Jalankan entrypoint dan Apache
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["apache2ctl", "-D", "FOREGROUND"]
