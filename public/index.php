@@ -1,2 +1,3 @@
 <?php
-echo "Hello from Laravel!";
+echo "✅ Hello from Railway!";
+exit;
