@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    @include('layout.navbar')
+    @include('navbar')
     @yield('content')
     <!-- Pastikan Lucide dimuat sebelum script kustom -->
     <script src="https://unpkg.com/lucide@0.441.0/dist/umd/lucide.min.js"></script>
