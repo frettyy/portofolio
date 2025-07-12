@@ -1,16 +1,16 @@
-services:
-  - type: web
-    name: laravel-app
-    runtime: docker
-    repo: https://github.com/frettyy/portofolio-ku
-    plan: free
-    envVars:
-      - key: APP_ENV
-        value: production
-      - key: APP_KEY
-        generateValue: true
-      - key: APP_DEBUG
-        value: false
-      - key: DB_CONNECTION
-        value: sqlite
-    dockerfilePath: Dockerfile
+# services:
+#   - type: web
+#     name: laravel-app
+#     runtime: docker
+#     repo: https://github.com/frettyy/portofolio-ku
+#     plan: free
+#     envVars:
+#       - key: APP_ENV
+#         value: production
+#       - key: APP_KEY
+#         generateValue: true
+#       - key: APP_DEBUG
+#         value: false
+#       - key: DB_CONNECTION
+#         value: sqlite
+#     dockerfilePath: Dockerfile
