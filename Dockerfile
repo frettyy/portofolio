@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y \
     unzip \
     libzip-dev \
     zip \
+    net-tools \
     && docker-php-ext-install pdo pdo_mysql zip
 
 # Enable Apache mod_rewrite
@@ -14,30 +15,34 @@ RUN a2enmod rewrite
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copy Laravel project files
+# Copy project files
 COPY . /var/www/html
 
 # Set working directory
 WORKDIR /var/www/html
 
-# Install dependencies
+# Install Laravel dependencies
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
 # Set permissions
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+RUN chown -R www-data:www-data storage bootstrap/cache
 
-# Update Apache DocumentRoot to point to Laravel's public folder
+# Set DocumentRoot to Laravel's public folder
 RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
 
-# 🔧 Update Apache to use Railway's port from ENV
-ENV PORT=8080
-RUN sed -i "s/Listen 80/Listen ${PORT}/" /etc/apache2/ports.conf
-
-# 🔧 Tambahkan ServerName untuk hilangkan warning
+# Tambahkan ServerName untuk hilangkan warning
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
-# 🔥 Expose port yang sesuai ENV
-EXPOSE ${PORT}
+# Laravel config cache
+RUN php artisan config:clear && php artisan config:cache
 
-# 🔥 Jalankan Apache di foreground
+# Salin entrypoint.sh ke container
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Railway akan set PORT lewat env var, default expose 80
+EXPOSE 80
+
+# Gunakan entrypoint dan jalankan apache
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["apache2ctl", "-D", "FOREGROUND"]
