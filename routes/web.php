@@ -4,14 +4,11 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/about', function () {
-    return view('About');
+    return view('about');
 });
 Route::get('/', function () {
-    return view('Service');
+    return view('service');
 });
 Route::get('/resume', function () {
-    return view('Resume');
+    return view('resume');
 });
-Route::get('/project-detail', function () {
-    return view('project-detail');
-})->name('project.show');
