@@ -40,6 +40,11 @@ RUN php artisan config:clear && php artisan config:cache
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
+
+RUN echo "== FILES IN /var/www/html ==" && ls -la /var/www/html
+RUN echo "== FILES IN /var/www/html/public ==" && ls -la /var/www/html/public
+
+
 # Railway akan set PORT lewat env var, default expose 80
 EXPOSE 8080
 
