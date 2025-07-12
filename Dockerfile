@@ -41,7 +41,7 @@ COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 # Railway akan set PORT lewat env var, default expose 80
-EXPOSE 80
+EXPOSE 8080
 
 # Gunakan entrypoint dan jalankan apache
 ENTRYPOINT ["/entrypoint.sh"]
