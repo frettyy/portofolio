@@ -2,13 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', function () {
+    return view('service');
+});
 
 Route::get('/about', function () {
-    return view('About');
+    return view('about');
 });
-Route::get('/', function () {
-    return view('Service');
-});
+
 Route::get('/resume', function () {
-    return view('Resume');
+    return view('resume');
 });
